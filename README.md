@@ -1,4 +1,4 @@
-Testing service  
+#Testing service  
   
 
 Для локального запуска необходимо:
@@ -26,7 +26,7 @@ user: admin
 password: admin
 
 user: manager1   
-pass: 1234567asdfghj
+password: 1234567asdfghj
 
 user: employee1  
 password: asdfghj1234567 
