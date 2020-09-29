@@ -1,4 +1,4 @@
-#Testing service  
+**Testing service** 
   
 
 Для локального запуска необходимо:
@@ -13,12 +13,13 @@
 
 Запустить сервер python manage.py runserver
  
-   
+****
 
 Запустить по адресу: http://127.0.0.1:8000/  
 
 Проект на Heroku: https://hwf2.herokuapp.com/ 
-  
+
+****
   
 Пользователи:
 
