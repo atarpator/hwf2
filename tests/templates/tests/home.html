@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <h2>Testing service</h2>
+      <p class="lead">
+        If you already have an account, please <a href="{% url 'login' %}">Log in</a>.<br>
+        <br>
+        Create a <a href="{% url 'manager_signup' %}">Manager account</a>.<br>
+        Create an <a href="{% url 'employee_signup' %}">Employee account</a>.
+      </p>
+    </div>
+  </div>
+</main>
+
+{% endblock content%}
+

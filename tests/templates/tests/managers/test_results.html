@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags humanize %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'managers:test_change_list' %}">My Tests</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'managers:test_change' test.pk %}">{{ test.name }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Results</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">{{ test.name }} Results</h2>
+  <p class="lead">Total Questions: {{total_questions}}</p>
+  <div class="card">
+    <div class="card-header">
+      <strong>Taken Tests</strong>
+      <span class="badge badge-pill badge-primary float-right">Average Score: {{ test_score.average_score|default_if_none:0.0|floatformat:2 }}</span>
+    </div>
+    <table class="table mb-0">
+      <thead>
+        <tr>
+          <th>Employee</th>
+          <th>Date</th>
+          <th>Score</th>
+          <th>Percentage</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for taken_test in taken_tests %}
+          <tr>
+            <td>{{ taken_test.employee.user.username }}</td>
+            <td>{{ taken_test.date }}</td>
+            <td>{{ taken_test.score }}</td>
+            <td>{{ taken_test.percentage }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="card-footer text-muted">
+      Total respondents: <strong>{{ total_taken_tests }}</strong>
+    </div>
+  </div>
+{% endblock %}

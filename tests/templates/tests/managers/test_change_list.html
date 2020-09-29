@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<nav aria-label="breadcrumb">
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item active" aria-current="page">My Tests</li>
+		</ol>
+	</nav>
+	<h2 class="mb-3">My Tests</h2>
+	<a href="{% url 'managers:test_add' %}" class="btn btn-primary mb-3" role="button">Add test</a>
+	<div class="card">
+		<table class="table mb-0">
+			<thead>
+				<tr>
+					<th>Quiz</th>
+					<th>Start date</th>
+					<th>End date</th>
+					<th>Questions</th>
+					<th>Taken</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for test in tests %}
+					<tr>
+						<td class="align-middle"><a href="{% url 'managers:test_change' test.pk %}">{{ test.name }}</a></td>
+						<td class="align-middle">{{ test.start_date }}</td>
+						<td class="align-middle">{{ test.end_date }}</td>
+						<td class="align-middle">{{ test.questions_count }}</td>
+						<td class="align-middle">{{ test.taken_count }}</td>
+						<td class="text-right">
+							<a href="{% url 'managers:test_results' test.pk %}" class="btn btn-primary">View results</a>
+						</td>
+					</tr>
+				{% empty %}
+					<tr>
+						<td class="bg-light text-center font-italic" colspan="6">You haven't created any tests yet.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

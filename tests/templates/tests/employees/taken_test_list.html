@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% include 'tests/employees/_header.html' with active='taken' %}
+	<div class="card">
+		<table class="table mb-0">
+			<thead>
+				<tr>
+					<th>Test</th>
+					<th>%</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for taken_test in taken_tests %}
+					<tr>
+						<td><a href="{% url 'employees:employee_test_results' taken_test.test.id %}">{{ taken_test.test.name }}</a></td>
+						<td>{{ taken_test.percentage }}</td>
+					</tr>
+				{% empty %}
+					<tr>
+						<td class="bg-light text-center font-italic" colspan="3">You haven't completed any test yet.</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

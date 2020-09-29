@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'datatables/dataTables.bootstrap4.min.css' %}">
+{% endblock %}
+
+{% block content %}
+  {% include 'tests/employees/_header.html' with active='new' %}
+  <table class="table table-bordered mb-0" id="tb_testlist" >
+    <thead>
+      <tr>
+        <th>Test</th>
+        <th class="d-none d-sm-table-cell">Start date</th>
+        <th class="d-none d-sm-table-cell">End date</th>
+        <th class="d-none d-sm-table-cell">Questions</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for test in tests %}
+        {% if test.is_now %}
+          <tr>
+            <td class="align-middle">{{ test.name }}</td>
+            <td class="align-middle d-none d-sm-table-cell">{{ test.start_date }}</td>
+            <td class="align-middle d-none d-sm-table-cell">{{ test.end_date }}</td>
+            <td class="align-middle d-none d-sm-table-cell">{{ test.questions_count }}</td>
+            <td class="text-right" data-orderable="false">
+              <a href="{% url 'employees:take_test' test.pk %}" class="btn btn-primary">Start test</a>
+            </td>
+          </tr>
+        {% else %}
+          <tr>
+            <td class="align-middle">{{ test.name }}</td>
+            <td class="align-middle d-none d-sm-table-cell">{{ test.start_date }}</td>
+            <td class="align-middle d-none d-sm-table-cell">{{ test.end_date }}</td>
+            <td class="align-middle d-none d-sm-table-cell">{{ test.questions_count }}</td>
+            <td class="text-right" data-orderable="false">
+              <a href="#" class="btn btn-secondary disabled">Not available</a>
+            </td>
+          </tr>
+        {% endif %}
+      {% empty %}
+        <tr>
+          <td class="bg-light text-center font-italic" colspan="5">No tests matching your interests right now.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+<script src="{% static 'datatables/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'datatables/dataTables.bootstrap4.min.js' %}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+		$('#tb_testlist').DataTable({"order": [[ 2, "desc" ]]});
+});
+</script>
+{% endblock %}
